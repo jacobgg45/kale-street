@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Brand palette from CLAUDE.md. Orange is for fills with dark text only. */
+@theme {
+  --font-sans: "Nunito", ui-rounded, system-ui, sans-serif;
+
+  --color-leaf: #2E7D3E;
+  --color-leaf-dark: #23612F;
+  --color-mint: #EEF7EC;
+  --color-orange: #F28C28;
+  --color-beet: #C2305E;
+  --color-ink: #1A2B1D;
+  --color-muted: #4A5A4D;
+
+  --color-flavor-green: #7FB24A;
+  --color-flavor-citrus: #F2A33A;
+  --color-flavor-beet: #C2305E;
+  --color-flavor-ginger: #F3D45B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white font-sans text-ink antialiased;
+}
