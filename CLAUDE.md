@@ -29,6 +29,9 @@ Brand name: **Kale Street** (confirmed Nov 2, 2026). It lives in `BRAND_NAME` in
 7. **Weekly delivery:** a mock order form (pick items, quantity, one-time or weekly). It shows an order summary only. No payment step.
 8. **Our story:** why raw, why glass, why local, and how the bottle deposit works.
 
+### Added Nov 9, 2026 (for the demo)
+9. **Simulated checkout:** cart (Add to cart on Menu, cart icon in header), `/cart`, `/checkout` with fake-card validation (Luhn, expiry, CVC, ZIP) and a "Text me before each market" checkbox, then `/order-confirmed`. Card numbers are never saved or sent; only brand + last 4 are kept in local storage. Keep the "Demo checkout: no real charges" notice and the test card (4242 4242 4242 4242).
+
 ### Won't do in this MVP
 Real payments, user accounts, a real database, an admin dashboard, wholesale ordering, a mobile app, or custom blends.
 
@@ -81,7 +84,7 @@ Keep all mock data in one folder (for example `src/data/`) as typed objects so i
 - The site runs locally and every Must-have page works on a phone-width screen.
 - The menu, markets and sign-up all read from mock data.
 - The FDA warning shows on the Menu page and in the footer.
-- No health claims, no payment step, no real data.
+- No health claims, no real payments (checkout is simulated), no real data.
 
 ## Built (Nov 2, 2026)
 
