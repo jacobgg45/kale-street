@@ -12,6 +12,7 @@ import {
   isValidCvc,
   isValidExpiry,
 } from '../lib/card'
+import { summaryLines } from '../lib/pricing'
 import { saveLocal } from '../lib/storage'
 import { OrderSummary } from '../components/OrderSummary'
 import { PageHeading } from '../components/PageHeading'
@@ -89,8 +90,9 @@ export default function Checkout() {
       email: form.email.trim(),
       phone: form.phone.trim(),
       marketId: form.market,
-      lines: cart.lines.map((l) => ({ name: l.product.name, count: l.count, price: l.product.price, kind: l.product.kind })),
+      lines: summaryLines(cart.lines),
       bottles: cart.bottles,
+      discount: cart.discount,
       deposit: cart.deposit,
       total: cart.total,
       cardBrand: cardBrand(form.card),
@@ -241,7 +243,13 @@ export default function Checkout() {
 
         <aside className="h-fit space-y-5 rounded-2xl bg-mint p-5 lg:sticky lg:top-24">
           <h2 className="text-xl font-extrabold text-leaf-dark">Order summary</h2>
-          <OrderSummary lines={cart.lines} bottles={cart.bottles} deposit={cart.deposit} total={cart.total} />
+          <OrderSummary
+            lines={summaryLines(cart.lines)}
+            bottles={cart.bottles}
+            discount={cart.discount}
+            deposit={cart.deposit}
+            total={cart.total}
+          />
           <button
             type="submit"
             disabled={processing}

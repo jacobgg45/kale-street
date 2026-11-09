@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import { formatPrice } from '../config'
 import { useCart } from '../lib/cart'
 import { flavorBg } from '../lib/flavor'
-import { OrderSummary } from '../components/OrderSummary'
+import { summaryLines } from '../lib/pricing'
+import { BundleHint, OrderSummary } from '../components/OrderSummary'
 import { PageHeading } from '../components/PageHeading'
 
 export default function Cart() {
@@ -22,7 +23,7 @@ export default function Cart() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
-      <PageHeading title="Your cart">Order now, pick up at the market this weekend.</PageHeading>
+      <PageHeading title="Your cart">Order now, pick up at your next market.</PageHeading>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
         <ul className="divide-y divide-mint rounded-2xl border border-mint">
@@ -69,7 +70,16 @@ export default function Cart() {
 
         <aside className="h-fit rounded-2xl bg-mint p-5 lg:sticky lg:top-24">
           <h2 className="mb-4 text-xl font-extrabold text-leaf-dark">Summary</h2>
-          <OrderSummary lines={cart.lines} bottles={cart.bottles} deposit={cart.deposit} total={cart.total} />
+          <OrderSummary
+            lines={summaryLines(cart.lines)}
+            bottles={cart.bottles}
+            discount={cart.discount}
+            deposit={cart.deposit}
+            total={cart.total}
+          />
+          <div className="mt-4">
+            <BundleHint bottles={cart.bottles} />
+          </div>
           <Link
             to="/checkout"
             className="mt-5 block rounded-full bg-orange px-6 py-3 text-center text-lg font-bold text-ink hover:brightness-95"

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { BOTTLE_DEPOSIT } from '../config'
 import { products } from '../data'
 import { CartContext, type CartState } from '../lib/cart'
+import { priceLines } from '../lib/pricing'
 
 const STORAGE_KEY = 'kale-street-cart'
 const MAX_PER_ITEM = 12
@@ -27,19 +27,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<CartState>(() => {
     const lines = products.filter((p) => (counts[p.id] ?? 0) > 0).map((p) => ({ product: p, count: counts[p.id] }))
-    const subtotal = lines.reduce((sum, l) => sum + l.product.price * l.count, 0)
-    const bottles = lines.filter((l) => l.product.kind === 'juice').reduce((sum, l) => sum + l.count, 0)
-    const deposit = bottles * BOTTLE_DEPOSIT
     const setCount = (id: string, count: number) =>
       setCounts((c) => ({ ...c, [id]: Math.min(MAX_PER_ITEM, Math.max(0, count)) }))
 
     return {
       lines,
       count: lines.reduce((sum, l) => sum + l.count, 0),
-      subtotal,
-      bottles,
-      deposit,
-      total: subtotal + deposit,
+      ...priceLines(lines),
       add: (id) => setCount(id, (counts[id] ?? 0) + 1),
       setCount,
       clear: () => setCounts({}),

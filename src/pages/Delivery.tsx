@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { BOTTLE_DEPOSIT, formatPrice } from '../config'
+import { DELIVERY_MINIMUM, formatPrice } from '../config'
 import { products } from '../data'
 import { flavorBg } from '../lib/flavor'
+import { priceLines, summaryLines } from '../lib/pricing'
+import { BundleHint, OrderSummary } from '../components/OrderSummary'
 import { PageHeading } from '../components/PageHeading'
 import { saveLocal } from '../lib/storage'
 
@@ -13,9 +15,9 @@ export default function Delivery() {
   const [placed, setPlaced] = useState(false)
 
   const lines = products.filter((p) => (qty[p.id] ?? 0) > 0).map((p) => ({ product: p, count: qty[p.id] }))
-  const subtotal = lines.reduce((sum, l) => sum + l.product.price * l.count, 0)
-  const bottles = lines.filter((l) => l.product.kind === 'juice').reduce((sum, l) => sum + l.count, 0)
-  const deposit = bottles * BOTTLE_DEPOSIT
+  const totals = priceLines(lines)
+  // The minimum counts juice and shots after bundle savings, not refundable deposits.
+  const shortBy = Math.max(0, DELIVERY_MINIMUM - (totals.subtotal - totals.discount))
 
   const change = (id: string, delta: number) =>
     setQty((q) => ({ ...q, [id]: Math.min(12, Math.max(0, (q[id] ?? 0) + delta)) }))
@@ -49,8 +51,8 @@ export default function Delivery() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <PageHeading title="Weekly delivery">
-        For regulars who can't make it to market. Pick your juices and we'll bring them to your door. Leave your empties
-        out and we'll swap them.
+        For regulars who can't make it to market. Free delivery on orders of {formatPrice(DELIVERY_MINIMUM)} or more.
+        Leave your empties out and we'll swap them.
       </PageHeading>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
@@ -112,31 +114,29 @@ export default function Delivery() {
           {lines.length === 0 ? (
             <p className="mt-4 text-muted">Add a juice or shot to get started.</p>
           ) : (
-            <dl className="mt-4 space-y-1">
-              {lines.map((l) => (
-                <div key={l.product.id} className="flex justify-between">
-                  <dt>
-                    {l.count} × {l.product.name}
-                  </dt>
-                  <dd>{formatPrice(l.product.price * l.count)}</dd>
-                </div>
-              ))}
-              {deposit > 0 && (
-                <div className="flex justify-between text-muted">
-                  <dt>Bottle deposit ({bottles}, refundable)</dt>
-                  <dd>{formatPrice(deposit)}</dd>
-                </div>
-              )}
-              <div className="mt-2 flex justify-between border-t border-leaf/30 pt-2 text-lg font-extrabold">
-                <dt>{frequency === 'weekly' ? 'Each week' : 'Total'}</dt>
-                <dd>{formatPrice(subtotal + deposit)}</dd>
-              </div>
-            </dl>
+            <div className="mt-4 space-y-4">
+              <OrderSummary
+                lines={summaryLines(lines)}
+                bottles={totals.bottles}
+                discount={totals.discount}
+                deposit={totals.deposit}
+                total={totals.total}
+                totalLabel={frequency === 'weekly' ? 'Each week' : 'Total'}
+              />
+              <BundleHint bottles={totals.bottles} />
+            </div>
+          )}
+
+          {lines.length > 0 && shortBy > 0 && (
+            <p className="mt-4 font-semibold text-beet" aria-live="polite">
+              Add {formatPrice(shortBy)} more for delivery. The {formatPrice(DELIVERY_MINIMUM)} minimum doesn't count bottle
+              deposits.
+            </p>
           )}
 
           <button
             type="button"
-            disabled={lines.length === 0}
+            disabled={lines.length === 0 || shortBy > 0}
             onClick={handlePlace}
             className="mt-5 w-full rounded-full bg-orange px-6 py-3 font-bold text-ink hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-50"
           >

@@ -19,7 +19,7 @@ export default function Home() {
             Raw juice from Orange County farms, in glass.
           </h1>
           <p className="mt-4 max-w-xl text-lg sm:text-xl">
-            Never heated. Pressed fresh for the weekend market. $12 a bottle.
+            Never heated. Pressed fresh for every market. $12 a bottle.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/signup" className="rounded-full bg-orange px-6 py-3 text-lg font-bold text-ink hover:brightness-95">

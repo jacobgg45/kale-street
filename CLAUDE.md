@@ -18,7 +18,7 @@ Brand name: **Kale Street** (confirmed Nov 2, 2026). It lives in `BRAND_NAME` in
 ## Scope
 
 ### Must have (build today)
-1. **Home:** hero with the headline "Raw juice from Orange County farms, in glass.", the subline "Never heated. Pressed fresh for the weekend market. $12 a bottle.", and a "Join the list" button.
+1. **Home:** hero with the headline "Raw juice from Orange County farms, in glass.", the subline "Never heated. Pressed fresh for every market. $12 a bottle." (markets run Wed, Sat, Sun), and a "Join the list" button.
 2. **Menu:** 5 juices and 2 shots from mock data. Each shows its name, ingredients, farm sources, size, price and a flavor color.
 3. **Markets:** a schedule of 3 farmers markets (name, city, day, hours) from mock data.
 4. **Sign up:** a form for name, email or phone, and preferred market. On submit it shows a confirmation and keeps the entry in memory or local storage only. No backend.

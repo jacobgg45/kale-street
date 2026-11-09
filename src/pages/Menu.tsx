@@ -11,7 +11,7 @@ export default function Menu() {
     <div className="mx-auto max-w-5xl px-4 py-12">
       <PageHeading title="Menu">
         Five juices and two shots, cold-pressed the day before market. Juices come in 16 oz glass with a{' '}
-        {formatPrice(BOTTLE_DEPOSIT)} refundable bottle deposit.
+        {formatPrice(BOTTLE_DEPOSIT)} refundable bottle deposit. Mix and match: 4 for $44, 5 for $55.
       </PageHeading>
 
       <h2 className="mb-4 text-2xl font-extrabold">Juices</h2>

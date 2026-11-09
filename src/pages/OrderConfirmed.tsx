@@ -1,6 +1,6 @@
 import { Link, Navigate, useLocation } from 'react-router-dom'
-import { formatPrice } from '../config'
 import { markets } from '../data'
+import { OrderSummary } from '../components/OrderSummary'
 
 export interface ConfirmedOrder {
   number: string
@@ -8,8 +8,9 @@ export interface ConfirmedOrder {
   email: string
   phone: string
   marketId: string
-  lines: { name: string; count: number; price: number; kind: 'juice' | 'shot' }[]
+  lines: { name: string; count: number; price: number }[]
   bottles: number
+  discount: number
   deposit: number
   total: number
   cardBrand: string
@@ -42,26 +43,14 @@ export default function OrderConfirmed() {
             {market?.name}, {market?.day} {market?.hours}
           </p>
         </div>
-        <dl className="space-y-1">
-          {order.lines.map((l) => (
-            <div key={l.name} className="flex justify-between gap-4">
-              <dt>
-                {l.count} × {l.name}
-              </dt>
-              <dd>{formatPrice(l.price * l.count)}</dd>
-            </div>
-          ))}
-          {order.deposit > 0 && (
-            <div className="flex justify-between gap-4 text-muted">
-              <dt>Bottle deposit ({order.bottles}, refundable)</dt>
-              <dd>{formatPrice(order.deposit)}</dd>
-            </div>
-          )}
-          <div className="mt-2 flex justify-between border-t border-leaf/30 pt-2 text-lg font-extrabold">
-            <dt>Paid</dt>
-            <dd>{formatPrice(order.total)}</dd>
-          </div>
-        </dl>
+        <OrderSummary
+          lines={order.lines}
+          bottles={order.bottles}
+          discount={order.discount}
+          deposit={order.deposit}
+          total={order.total}
+          totalLabel="Paid"
+        />
         <p className="text-sm text-muted">
           {order.cardBrand} ending in {order.cardLast4} · Receipt to {order.email}
         </p>
