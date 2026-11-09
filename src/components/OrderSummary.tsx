@@ -1,44 +1,45 @@
-import { BUNDLE_BOTTLE_PRICE, BUNDLE_MIN_BOTTLES, formatPrice } from '../config'
+import { BOTTLE_RETURN_CREDIT, BUNDLE_BOTTLE_PRICE, BUNDLE_MIN_BOTTLES, formatPrice } from '../config'
 
 interface Props {
   lines: { name: string; count: number; price: number }[]
   bottles: number
   discount: number
-  deposit: number
   total: number
   totalLabel?: string
 }
 
-export function OrderSummary({ lines, bottles, discount, deposit, total, totalLabel = 'Total' }: Props) {
+export function OrderSummary({ lines, bottles, discount, total, totalLabel = 'Total' }: Props) {
   return (
-    <dl className="space-y-1">
-      {lines.map((l) => (
-        <div key={l.name} className="flex justify-between gap-4">
-          <dt>
-            {l.count} × {l.name}
-          </dt>
-          <dd>{formatPrice(l.price * l.count)}</dd>
+    <div className="space-y-3">
+      <dl className="space-y-1">
+        {lines.map((l) => (
+          <div key={l.name} className="flex justify-between gap-4">
+            <dt>
+              {l.count} × {l.name}
+            </dt>
+            <dd>{formatPrice(l.price * l.count)}</dd>
+          </div>
+        ))}
+        {discount > 0 && (
+          <div className="flex justify-between gap-4 font-semibold text-leaf-dark">
+            <dt>
+              Bundle: {bottles} juices at {formatPrice(BUNDLE_BOTTLE_PRICE)}
+            </dt>
+            <dd>−{formatPrice(discount)}</dd>
+          </div>
+        )}
+        <div className="mt-2 flex justify-between border-t border-leaf/30 pt-2 text-lg font-extrabold">
+          <dt>{totalLabel}</dt>
+          <dd>{formatPrice(total)}</dd>
         </div>
-      ))}
-      {discount > 0 && (
-        <div className="flex justify-between gap-4 font-semibold text-leaf-dark">
-          <dt>
-            Bundle: {bottles} juices at {formatPrice(BUNDLE_BOTTLE_PRICE)}
-          </dt>
-          <dd>−{formatPrice(discount)}</dd>
-        </div>
+      </dl>
+      {bottles > 0 && (
+        <p className="text-sm text-muted">
+          Bring {bottles === 1 ? 'the bottle' : `all ${bottles} bottles`} back and get{' '}
+          {formatPrice(BOTTLE_RETURN_CREDIT * bottles)} off your next order ({formatPrice(BOTTLE_RETURN_CREDIT)} per bottle).
+        </p>
       )}
-      {deposit > 0 && (
-        <div className="flex justify-between gap-4 text-muted">
-          <dt>Bottle deposit ({bottles}, refundable)</dt>
-          <dd>{formatPrice(deposit)}</dd>
-        </div>
-      )}
-      <div className="mt-2 flex justify-between border-t border-leaf/30 pt-2 text-lg font-extrabold">
-        <dt>{totalLabel}</dt>
-        <dd>{formatPrice(total)}</dd>
-      </div>
-    </dl>
+    </div>
   )
 }
 

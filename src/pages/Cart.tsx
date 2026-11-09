@@ -74,7 +74,6 @@ export default function Cart() {
             lines={summaryLines(cart.lines)}
             bottles={cart.bottles}
             discount={cart.discount}
-            deposit={cart.deposit}
             total={cart.total}
           />
           <div className="mt-4">

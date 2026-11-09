@@ -27,7 +27,7 @@ Brand name: **Kale Street** (confirmed Nov 2, 2026). It lives in `BRAND_NAME` in
 ### Should have (if time allows)
 6. **Farms:** cards for each mock farm and what it grows.
 7. **Weekly delivery:** a mock order form (pick items, quantity, one-time or weekly). It shows an order summary only. No payment step.
-8. **Our story:** why raw, why glass, why local, and how the bottle deposit works.
+8. **Our story:** why raw, why glass, why local, and how bottle returns work.
 
 ### Added Nov 9, 2026 (for the demo)
 9. **Simulated checkout:** cart (Add to cart on Menu, cart icon in header), `/cart`, `/checkout` with fake-card validation (Luhn, expiry, CVC, ZIP) and a "Text me before each market" checkbox, then `/order-confirmed`. Card numbers are never saved or sent; only brand + last 4 are kept in local storage. Keep the "Demo checkout: no real charges" notice and the test card (4242 4242 4242 4242).
@@ -68,7 +68,7 @@ Keep all mock data in one folder (for example `src/data/`) as typed objects so i
   - One more shot with a placeholder name
 - **Markets:** 3 placeholder Orange County farmers markets (name, city, day, hours).
 - **Farms:** 3 to 4 placeholder farms with what each one supplies.
-- **Bottle deposit:** a placeholder amount in one constant.
+- **Bottle returns:** not a deposit. Nothing extra is charged; each returned bottle earns $0.50 off the next juice ($11.50 instead of $12). `BOTTLE_RETURN_CREDIT` in `src/config.ts`.
 
 ## How to work
 

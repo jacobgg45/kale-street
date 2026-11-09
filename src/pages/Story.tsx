@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BOTTLE_DEPOSIT, BRAND_NAME, formatPrice } from '../config'
+import { BOTTLE_RETURN_CREDIT, BRAND_NAME, formatPrice } from '../config'
 import { PageHeading } from '../components/PageHeading'
 
 const sections = [
@@ -34,12 +34,14 @@ export default function Story() {
         ))}
 
         <section className="rounded-2xl bg-mint p-6">
-          <h2 className="text-2xl font-extrabold text-leaf-dark">How the bottle deposit works</h2>
+          <h2 className="text-2xl font-extrabold text-leaf-dark">How bottle returns work</h2>
           <ol className="mt-4 list-decimal space-y-2 pl-5 text-lg">
-            <li>Pay a {formatPrice(BOTTLE_DEPOSIT)} deposit on each glass bottle.</li>
-            <li>Rinse it when you're done.</li>
+            <li>Rinse your glass bottle when you're done.</li>
             <li>Bring it to any market or leave it out for delivery.</li>
-            <li>Get your {formatPrice(BOTTLE_DEPOSIT)} back, or put it toward your next juice.</li>
+            <li>
+              Get {formatPrice(BOTTLE_RETURN_CREDIT)} off your next juice: {formatPrice(12 - BOTTLE_RETURN_CREDIT)} instead of
+              $12.
+            </li>
           </ol>
         </section>
 

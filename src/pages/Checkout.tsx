@@ -1,5 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { BOTTLE_RETURN_CREDIT, formatPrice } from '../config'
 import { markets } from '../data'
 import { useCart } from '../lib/cart'
 import {
@@ -93,7 +94,6 @@ export default function Checkout() {
       lines: summaryLines(cart.lines),
       bottles: cart.bottles,
       discount: cart.discount,
-      deposit: cart.deposit,
       total: cart.total,
       cardBrand: cardBrand(form.card),
       cardLast4: digitsOnly(form.card).slice(-4),
@@ -116,7 +116,8 @@ export default function Checkout() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
-      <PageHeading title="Checkout">Pay now, pick up at the market. Bring your empties back for the deposit.</PageHeading>
+      <PageHeading title="Checkout">Pay now, pick up at the market. Bring your empties back for{' '}
+        {formatPrice(BOTTLE_RETURN_CREDIT)} off each juice next time.</PageHeading>
 
       <div className="mb-8 rounded-xl border-2 border-orange bg-orange/15 p-4">
         <p className="font-bold">Demo checkout: no real charges.</p>
@@ -247,7 +248,6 @@ export default function Checkout() {
             lines={summaryLines(cart.lines)}
             bottles={cart.bottles}
             discount={cart.discount}
-            deposit={cart.deposit}
             total={cart.total}
           />
           <button

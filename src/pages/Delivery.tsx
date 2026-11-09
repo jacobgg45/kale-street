@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DELIVERY_MINIMUM, formatPrice } from '../config'
+import { BOTTLE_RETURN_CREDIT, DELIVERY_MINIMUM, formatPrice } from '../config'
 import { products } from '../data'
 import { flavorBg } from '../lib/flavor'
 import { priceLines, summaryLines } from '../lib/pricing'
@@ -16,8 +16,7 @@ export default function Delivery() {
 
   const lines = products.filter((p) => (qty[p.id] ?? 0) > 0).map((p) => ({ product: p, count: qty[p.id] }))
   const totals = priceLines(lines)
-  // The minimum counts juice and shots after bundle savings, not refundable deposits.
-  const shortBy = Math.max(0, DELIVERY_MINIMUM - (totals.subtotal - totals.discount))
+  const shortBy = Math.max(0, DELIVERY_MINIMUM - totals.total)
 
   const change = (id: string, delta: number) =>
     setQty((q) => ({ ...q, [id]: Math.min(12, Math.max(0, (q[id] ?? 0) + delta)) }))
@@ -52,7 +51,7 @@ export default function Delivery() {
     <div className="mx-auto max-w-5xl px-4 py-12">
       <PageHeading title="Weekly delivery">
         For regulars who can't make it to market. Free delivery on orders of {formatPrice(DELIVERY_MINIMUM)} or more.
-        Leave your empties out and we'll swap them.
+        Leave your empties out and get {formatPrice(BOTTLE_RETURN_CREDIT)} off each one.
       </PageHeading>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
@@ -119,7 +118,6 @@ export default function Delivery() {
                 lines={summaryLines(lines)}
                 bottles={totals.bottles}
                 discount={totals.discount}
-                deposit={totals.deposit}
                 total={totals.total}
                 totalLabel={frequency === 'weekly' ? 'Each week' : 'Total'}
               />
@@ -129,8 +127,7 @@ export default function Delivery() {
 
           {lines.length > 0 && shortBy > 0 && (
             <p className="mt-4 font-semibold text-beet" aria-live="polite">
-              Add {formatPrice(shortBy)} more for delivery. The {formatPrice(DELIVERY_MINIMUM)} minimum doesn't count bottle
-              deposits.
+              Add {formatPrice(shortBy)} more for delivery ({formatPrice(DELIVERY_MINIMUM)} minimum).
             </p>
           )}
 

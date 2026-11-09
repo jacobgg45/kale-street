@@ -1,4 +1,4 @@
-import { BOTTLE_DEPOSIT, BUNDLE_BOTTLE_PRICE, BUNDLE_MIN_BOTTLES } from '../config'
+import { BUNDLE_BOTTLE_PRICE, BUNDLE_MIN_BOTTLES } from '../config'
 import type { Product } from '../data'
 
 export interface PricedLine {
@@ -9,10 +9,9 @@ export interface PricedLine {
 export interface Totals {
   /** Full menu price of everything, before the bundle discount */
   subtotal: number
-  /** Glass bottles (juices); shots don't count toward bundles or deposits */
+  /** Glass bottles (juices); shots don't count toward bundles */
   bottles: number
   discount: number
-  deposit: number
   total: number
 }
 
@@ -28,6 +27,5 @@ export function priceLines(lines: PricedLine[]): Totals {
     bottles >= BUNDLE_MIN_BOTTLES
       ? juices.reduce((sum, l) => sum + Math.max(0, l.product.price - BUNDLE_BOTTLE_PRICE) * l.count, 0)
       : 0
-  const deposit = bottles * BOTTLE_DEPOSIT
-  return { subtotal, bottles, discount, deposit, total: subtotal - discount + deposit }
+  return { subtotal, bottles, discount, total: subtotal - discount }
 }

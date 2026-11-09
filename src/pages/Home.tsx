@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BOTTLE_DEPOSIT, formatPrice } from '../config'
+import { BOTTLE_RETURN_CREDIT, formatPrice } from '../config'
 import { markets, products } from '../data'
 import { flavorBg } from '../lib/flavor'
 import { MarketCard } from '../components/MarketCard'
@@ -7,7 +7,7 @@ import { MarketCard } from '../components/MarketCard'
 const points = [
   { title: 'Never heated', body: 'Cold-pressed and sold raw. No pasteurization, no high-pressure processing.' },
   { title: 'Local farms', body: 'Organic ingredients from farms around Orange County, named on every bottle.' },
-  { title: 'Glass, returned', body: `Every bottle is glass. Bring it back for your ${formatPrice(BOTTLE_DEPOSIT)} deposit and we reuse it.` },
+  { title: 'Glass, returned', body: `Every bottle is glass. Bring it back for ${formatPrice(BOTTLE_RETURN_CREDIT)} off your next juice, and we reuse it.` },
 ]
 
 export default function Home() {

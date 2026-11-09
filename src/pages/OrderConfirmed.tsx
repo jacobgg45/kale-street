@@ -11,7 +11,6 @@ export interface ConfirmedOrder {
   lines: { name: string; count: number; price: number }[]
   bottles: number
   discount: number
-  deposit: number
   total: number
   cardBrand: string
   cardLast4: string
@@ -47,7 +46,6 @@ export default function OrderConfirmed() {
           lines={order.lines}
           bottles={order.bottles}
           discount={order.discount}
-          deposit={order.deposit}
           total={order.total}
           totalLabel="Paid"
         />

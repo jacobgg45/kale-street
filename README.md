@@ -15,7 +15,7 @@ Open http://localhost:5173.
 
 ## Where things are
 
-- `src/config.ts`: brand name, bottle deposit, FDA warning text
+- `src/config.ts`: brand name, bottle-return credit, bundle pricing, delivery minimum
 - `src/data/`: mock products, markets, farms
 - `src/pages/`: one file per page
 - `CLAUDE.md`: build spec and content rules (no health claims, FDA warning required)

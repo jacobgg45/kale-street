@@ -11,11 +11,10 @@ export interface CartState {
   /** Total number of items (bottles + shots) */
   count: number
   subtotal: number
-  /** Glass bottles in the cart; shots don't carry a deposit */
+  /** Glass bottles in the cart (juices, not shots) */
   bottles: number
   /** Bundle savings (4+ juices at the bundle price) */
   discount: number
-  deposit: number
   total: number
   add: (id: string) => void
   setCount: (id: string, count: number) => void

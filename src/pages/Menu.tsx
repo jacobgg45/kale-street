@@ -1,4 +1,4 @@
-import { BOTTLE_DEPOSIT, formatPrice } from '../config'
+import { BOTTLE_RETURN_CREDIT, formatPrice } from '../config'
 import { products } from '../data'
 import { PageHeading } from '../components/PageHeading'
 import { ProductCard } from '../components/ProductCard'
@@ -10,8 +10,8 @@ export default function Menu() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       <PageHeading title="Menu">
-        Five juices and two shots, cold-pressed the day before market. Juices come in 16 oz glass with a{' '}
-        {formatPrice(BOTTLE_DEPOSIT)} refundable bottle deposit. Mix and match: 4 for $44, 5 for $55.
+        Five juices and two shots, cold-pressed the day before market. Juices come in 16 oz glass: bring the bottle
+        back for {formatPrice(BOTTLE_RETURN_CREDIT)} off your next one. Mix and match: 4 for $44, 5 for $55.
       </PageHeading>
 
       <h2 className="mb-4 text-2xl font-extrabold">Juices</h2>
