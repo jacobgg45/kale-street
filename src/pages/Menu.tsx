@@ -1,6 +1,5 @@
 import { BOTTLE_DEPOSIT, formatPrice } from '../config'
 import { products } from '../data'
-import { FdaWarning } from '../components/FdaWarning'
 import { PageHeading } from '../components/PageHeading'
 import { ProductCard } from '../components/ProductCard'
 
@@ -14,8 +13,6 @@ export default function Menu() {
         Five juices and two shots, cold-pressed the day before market. Juices come in 16 oz glass with a{' '}
         {formatPrice(BOTTLE_DEPOSIT)} refundable bottle deposit.
       </PageHeading>
-
-      <FdaWarning className="mb-10" />
 
       <h2 className="mb-4 text-2xl font-extrabold">Juices</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

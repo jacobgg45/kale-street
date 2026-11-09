@@ -22,7 +22,7 @@ Brand name: **Kale Street** (confirmed Nov 2, 2026). It lives in `BRAND_NAME` in
 2. **Menu:** 5 juices and 2 shots from mock data. Each shows its name, ingredients, farm sources, size, price and a flavor color.
 3. **Markets:** a schedule of 3 farmers markets (name, city, day, hours) from mock data.
 4. **Sign up:** a form for name, email or phone, and preferred market. On submit it shows a confirmation and keeps the entry in memory or local storage only. No backend.
-5. **FDA warning:** the unpasteurized-juice warning (text below) appears on the Menu page and in the site footer.
+5. **FDA warning:** removed from the website on Nov 9, 2026 at Jake's request. Do not add it back unless asked. It still belongs on the bottle label (or a booth sign).
 
 ### Should have (if time allows)
 6. **Farms:** cards for each mock farm and what it grows.
@@ -37,7 +37,7 @@ Real payments, user accounts, a real database, an admin dashboard, wholesale ord
 
 ## Content rules
 
-- **FDA warning text, exactly:** "WARNING: This product has not been pasteurized and therefore may contain harmful bacteria that can cause serious illness in children, the elderly, and persons with weakened immune systems."
+- **FDA warning text, exactly (for the bottle label, not the site):** "WARNING: This product has not been pasteurized and therefore may contain harmful bacteria that can cause serious illness in children, the elderly, and persons with weakened immune systems."
 - **No health or medical claims.** Never say the juice treats, cures, prevents, detoxes or boosts anything. Allowed: "raw", "cold-pressed", "never heated", "organic ingredients", "from local farms".
 - Do not market to kids, pregnant women or the elderly.
 - Use plain, warm, short copy.
@@ -83,7 +83,6 @@ Keep all mock data in one folder (for example `src/data/`) as typed objects so i
 
 - The site runs locally and every Must-have page works on a phone-width screen.
 - The menu, markets and sign-up all read from mock data.
-- The FDA warning shows on the Menu page and in the footer.
 - No health claims, no real payments (checkout is simulated), no real data.
 
 ## Built (Nov 2, 2026)

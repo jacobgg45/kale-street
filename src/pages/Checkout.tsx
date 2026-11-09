@@ -13,7 +13,6 @@ import {
   isValidExpiry,
 } from '../lib/card'
 import { saveLocal } from '../lib/storage'
-import { FdaWarning } from '../components/FdaWarning'
 import { OrderSummary } from '../components/OrderSummary'
 import { PageHeading } from '../components/PageHeading'
 import type { ConfirmedOrder } from './OrderConfirmed'
@@ -255,7 +254,6 @@ export default function Checkout() {
               Please fix the highlighted fields.
             </p>
           )}
-          <FdaWarning className="text-xs" />
         </aside>
       </form>
     </div>

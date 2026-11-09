@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom'
 import { BRAND_NAME } from '../config'
-import { FdaWarning } from './FdaWarning'
 
 export function Footer() {
   return (
     <footer className="mt-16 bg-mint">
       <div className="mx-auto max-w-5xl space-y-6 px-4 py-10">
-        <FdaWarning />
         <div className="flex flex-col gap-4 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             <span className="font-bold text-leaf-dark">{BRAND_NAME}</span> · Raw, cold-pressed, Orange County
